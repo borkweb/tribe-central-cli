@@ -17,19 +17,20 @@ ln -s central-cli/central.sh /usr/local/bin/central
 This was done purely to make the process of logging what I've done easier, so for now we lack more methods.
 
 ### Logging Time to a Ticket
-Passing all arguments without names
+**Named Arguments**
+* **--date:** If numeric will subtract from today that number of days, if string will be used as date using `moment()`
+* **--spent:** Expects a numeric value
+
+
+_Passing all arguments without names_
 ```
 central log 37317 20-11-2015 1 "My own Slack activity for today" 25
 ```
 
-Shortcuted using `tickets` index from `config.json` and used 2 named arguments
+_Shortcuted using `tickets` index from `config.json` and used 2 named arguments_
 ```
 central log communications --spent 1 --date 1
 ```
-
-* **--date:** If numeric will subtract from today that number of days, if string will be used as date using `moment()`
-* **--spent:** Expects a numeric value
-
 
 _Terminal Output Expected:_
 ```
