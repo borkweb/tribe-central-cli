@@ -1,0 +1,32 @@
+# Gereral #
+###########
+.ssh
+.svn
+
+# OS #
+#######
+.DS_Store*
+ehthumbs.db
+Thumbs.db
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+.sass-cache
+
+.dropbox
+*.sql
+desktop.ini
+.init
+*.log
+*.exe*
+
+# Project #
+###########
+node_modules
+tmp
+config.json

@@ -1,0 +1,27 @@
+{
+  "name": "tribe-central-logger",
+  "version": "0.0.1",
+  "description": "Log time to central",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johntitus/node-horseman.git"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "node-horseman": "~2.8",
+    "moment": "~2.10",
+    "optimist": "~0.6",
+    "lodash": "~3.10",
+    "colors": "~1.1"
+  },
+  "devDependencies": {
+  },
+  "scripts": {
+  },
+  "keywords": [
+    "tribe",
+    "central"
+  ],
+  "author": "Gustavo Bordoni <gustavo@tri.be>",
+  "license": "GPLv3"
+}
