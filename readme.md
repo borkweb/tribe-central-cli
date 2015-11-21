@@ -27,7 +27,11 @@ Shortcuted using `tickets` index from `config.json` and used 2 named arguments
 central log communications --spent 1 --date 1
 ```
 
-Terminal Output Expected:
+* **--date:** If numeric will subtract from today that number of days, if string will be used as date using `moment()`
+* **--spent:** Expects a numeric value
+
+
+_Terminal Output Expected:_
 ```
 Success: Completed Login to Central
 Success: Logged time
