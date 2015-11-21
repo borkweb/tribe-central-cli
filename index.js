@@ -39,10 +39,12 @@ if ( 'log' === action ){
 		} else {
 			args.date = moment( argv.date ).format( 'YYYY-MM-DD' );
 		}
-	}
-
-	if ( ! args.date ){
-		args.date = moment().format( 'YYYY-MM-DD' );
+	} else {
+		if ( ! args.date ){
+			args.date = moment().format( 'YYYY-MM-DD' );
+		} else {
+			args.date = moment( args.date ).format( 'YYYY-MM-DD' );
+		}
 	}
 }
 
