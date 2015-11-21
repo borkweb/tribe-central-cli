@@ -20,6 +20,8 @@ This was done purely to make the process of logging what I've done easier, so fo
 **Named Arguments**
 * **--date:** If numeric will subtract from today that number of days, if string will be used as date using `moment()`
 * **--spent:** Expects a numeric value
+* **--comment:** Expects a String describing your activity
+* **--activity:** Expects a String with the type of activity or a numeric id
 
 
 _Passing all arguments without names_

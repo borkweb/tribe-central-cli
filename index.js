@@ -10,6 +10,15 @@ colors.setTheme({
   success: ['green', 'bold']
 });
 
+// Get our configurations file
+var config = require( './config.json' );
+config.central = {
+	baseUrl: "https://central.tri.be",
+};
+
+// Configure central
+var central = require( './inc' )( config );
+
 // Setup Arguments variables
 var action,
 	args = {};
@@ -28,6 +37,32 @@ if ( 'log' === action ){
 	args.spent = argv._[3];
 	args.comment = argv._[4];
 	args.activity = argv._[5];
+
+	if ( ! _.isFinite( args.ticket ) ) {
+		if ( typeof config.tickets[ args.ticket ] !== 'undefined' ) {
+			// Fetch from Configuration
+			var ticket = config.tickets[ args.ticket ];
+
+			args.ticket = ticket.id;
+			args.comment = ticket.comment;
+			args.activity = ticket.activity;
+		} else {
+			console.log( 'Error: '.error + 'Unknown Ticket' )
+
+			horseman.close();
+			process.exit(1);
+		}
+	}
+
+	if ( ! _.isFinite( argv.activity ) ) {
+		if ( typeof config.activity[ argv.activity ] !== 'undefined' ) {
+			args.activity = config.activity[ argv.activity ];
+		}
+	}
+
+	if ( argv.comment ) {
+		args.comment = argv.comment;
+	}
 
 	if ( argv.spent ){
 		args.spent = argv.spent;
@@ -55,33 +90,6 @@ var horseman = new Horseman();
 horseman.userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64; rv:27.0) Gecko/20100101 Firefox/27.0")
 	.viewport( 1280, 1024 )
 	.cookies( {} );
-
-
-// Get our configurations file
-var config = require( './config.json' );
-config.central = {
-	baseUrl: "https://central.tri.be",
-};
-
-
-// Configure central
-var central = require( './inc' )( config );
-
-if ( ! _.isFinite( args.ticket ) ) {
-	if ( typeof config.tickets[ args.ticket ] !== 'undefined' ) {
-		// Fetch from Configuration
-		var ticket = config.tickets[ args.ticket ];
-
-		args.ticket = ticket.id;
-		args.comment = ticket.comment;
-		args.activity = ticket.activity;
-	} else {
-		console.log( 'Error: '.error + 'Unknown Ticket' )
-
-		horseman.close();
-		process.exit(1);
-	}
-}
 
 // Login!
 central.login( horseman, config )
