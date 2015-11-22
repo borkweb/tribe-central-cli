@@ -1,9 +1,14 @@
-var path = require('path');
-var moment = require('moment');
-var argv = require('optimist').argv;
-var _ = require('lodash');
-var colors = require('colors');
+var path = require( 'path' ),
+	moment = require( 'moment' ),
+	argv = require( 'optimist' ).argv,
+	_ = require( 'lodash' ),
+	request = require( 'request' ),
+	colors = require( 'colors' );
 
+// Use console grouping
+require( 'console-group' ).install();
+
+// Setup Colors for terminal
 colors.setTheme({
   error: ['red', 'bold'],
   warning: ['yellow', 'bold'],
@@ -48,8 +53,6 @@ if ( 'log' === action ){
 			args.activity = ticket.activity;
 		} else {
 			console.log( 'Error: '.error + 'Unknown Ticket' )
-
-			horseman.close();
 			process.exit(1);
 		}
 	}
@@ -81,39 +84,23 @@ if ( 'log' === action ){
 			args.date = moment( args.date ).format( 'YYYY-MM-DD' );
 		}
 	}
-}
 
-// Require and Setup Horseman
-var Horseman = require('node-horseman');
-var horseman = new Horseman();
+	request( central.opt.timeEntries( 'create', args ), function ( error, response, body ) {
+		central.response.isAuthorized( response, error, body );
 
-horseman.userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64; rv:27.0) Gecko/20100101 Firefox/27.0")
-	.viewport( 1280, 1024 )
-	.cookies( {} );
-
-// Login!
-central.login( horseman, config )
-
-	// After this point you are logged in
-	.open( central.link.ticketLog( args.ticket ) )
-	.value( '#time_entry_spent_on', args.date )
-	.value( '#time_entry_hours', args.spent )
-	.value( '#time_entry_comments', args.comment )
-	.value( '#time_entry_activity_id', args.activity )
-	.click( '#content input[name="commit"]' )
-	.waitForNextPage()
-	.count( '#errorExplanation' )
-	.then(function( qty ) {
-		if ( qty === 0 ){
+		if ( 201 === response.statusCode ){
 			console.log( 'Success: '.success + 'Logged time' );
-			console.log( args );
+			console.log( body );
 		} else {
-			console.log( 'Error: '.success + 'Cannot log this entry' )
-			console.log( args );
-
-			horseman.close();
+			console.log( 'Error: '.error + 'Cannot log this entry' );
+			console.log( body );
 			process.exit(1);
 		}
-	})
+	} );
 
-	.close();
+} else {
+	console.log( 'Error: '.error + '"' + action +  '"' + ' is not a defined command' );
+	process.exit(1);
+}
+
+
