@@ -5,9 +5,6 @@ var path = require( 'path' ),
 	request = require( 'request' ),
 	colors = require( 'colors' );
 
-// Use console grouping
-require( 'console-group' ).install();
-
 // Setup Colors for terminal
 colors.setTheme({
   error: ['red', 'bold'],
