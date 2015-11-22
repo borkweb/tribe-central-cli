@@ -1,10 +1,10 @@
 # How to Setup
 1. Clone the repository to any place on your machine
 2. Now Configure your `config.json` file
-4. Install [Node](https://nodejs.org/)
-5. Access the `central-cli` folder and type `sudo npm install`
-6. Link `central.sh` to your a folder in your path
-7. Make sure `central.sh` has permissions to be executed `chmod +x central.sh`
+3. Install [Node](https://nodejs.org/)
+4. Access the `central-cli` folder and type `sudo npm install`
+5. Link `central.sh` to your a folder in your path
+6. Make sure `central.sh` has permissions to be executed `chmod +x central.sh`
 
 ```
 chmod +x central-cli/central.sh
