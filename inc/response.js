@@ -7,11 +7,11 @@ module.exports = function( config ){
 		if ( 401 === response.statusCode ) {
 			console.log( 'Error: '.error + 'Cannot connect to Central' );
 			if ( typeof this.config.apiKey === 'undefined' ) {
-				console.log( '@'.error + 'Your API key is not defined' );
+				console.log( '@  '.error + 'Your API key is not defined' );
 			} else if ( '' === this.config.apiKey ) {
-				console.log( '@'.error + 'Your API key is empty' );
+				console.log( '@  '.error + 'Your API key is empty' );
 			} else {
-				console.log( '@'.error + 'Your API key is invalid' );
+				console.log( '@  '.error + 'Your API key is invalid' );
 			}
 
 			process.exit(1);
