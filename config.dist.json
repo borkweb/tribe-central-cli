@@ -1,6 +1,5 @@
 {
-	"username": "your-username",
-	"password": "your-password-plain-text",
+	"apiKey": "you API key hash!",
 	"tickets": {
 		"communication": {
 			"id": 37317,

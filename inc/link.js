@@ -4,11 +4,15 @@ module.exports = function( config ){
 	};
 
 	module.ticket = function( id ){
-		return this.config.central.baseUrl +'/issues/' + id;
+		return this.config.central.baseUrl + '/issues/' + id;
+	}
+
+	module.ticketEntries = function( id ){
+		return this.ticket( id ) + '/time_entries';
 	}
 
 	module.ticketLog = function( id ){
-		return this.ticket( id ) + '/time_entries/new';
+		return this.ticketEntries( id ) + '/new';
 	}
 
 	return module;
