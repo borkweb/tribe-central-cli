@@ -52,41 +52,7 @@ Success: Logged time
 
 
 # Settings: `config.json`
-Create this file on your `central-cli` folder
 
-```
-{
-	"apiKey": "you API key hash!",
-
-	"tickets": {
-		"communication": {
-			"id": 37317,
-			"comment": "Slack Daily Usage",
-			"activity": 25
-		},
-		"clocking": {
-			"id": 31467,
-			"comment": "Daily Clocking ;D",
-			"activity": 25
-		},
-		"codereview": {
-			"id": 38800,
-			"comment": "Code Review on Multiple Pull Requests",
-			"activity": 445
-		}
-	},
-
-	"activity": {
-		"backend": 445,
-		"design": 208,
-		"frontend": 211,
-		"management": 374,
-		"qa": 212,
-		"scrum": 143,
-		"strategy": 207,
-		"support": 337,
-		"internal": 392
-	}
-
-}
-```
+* Copy the `config.dist.json` to `config.json`.
+* Add your API key from Central (found in Setting on the sidebar)
+* Customize your activities as you see fit!
