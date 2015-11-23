@@ -1,0 +1,43 @@
+{
+	"username": "your-username",
+	"password": "your-password-plain-text",
+	"tickets": {
+		"communication": {
+			"id": 37317,
+			"comment": "Catching up on slack",
+			"activity": "internal",
+			"project": "company"
+		},
+		"logging": {
+			"id": 31467,
+			"comment": "Logging time",
+			"activity": "internal",
+			"project": "company"
+		}
+	},
+	"activity": {
+		"default": {
+			"backend": 445,
+			"design": 208,
+			"frontend": 211,
+			"pm": 374,
+			"qa": 212,
+			"scrum": 143,
+			"strategy": 207,
+			"support": 337,
+			"internal": 392
+		},
+		"company": {
+			"backend": 446,
+			"design": 217,
+			"frontend": 220,
+			"pm": 29,
+			"qa": 223,
+			"scrum": 222,
+			"strategy": 216,
+			"support": 323,
+			"system": 226,
+			"internal": 25
+		}
+	}
+}

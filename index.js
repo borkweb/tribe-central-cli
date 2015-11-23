@@ -13,7 +13,7 @@ colors.setTheme({
 // Get our configurations file
 var config = require( './config.json' );
 config.central = {
-	baseUrl: "https://central.tri.be",
+	baseUrl: 'https://central.tri.be',
 };
 
 // Configure central
@@ -21,9 +21,10 @@ var central = require( './inc' )( config );
 
 // Setup Arguments variables
 var action,
+	project,
 	args = {};
 
-argv._.forEach( function ( val, index, array ) {
+argv._.forEach( function ( val, index ) {
 	switch (index) {
 		case 0:
 			action = val;
@@ -37,6 +38,7 @@ if ( 'log' === action ){
 	args.spent = argv._[3];
 	args.comment = argv._[4];
 	args.activity = argv._[5];
+	project = argv._[6] ? argv._[6] : 'default';
 
 	if ( ! _.isFinite( args.ticket ) ) {
 		if ( typeof config.tickets[ args.ticket ] !== 'undefined' ) {
@@ -46,8 +48,11 @@ if ( 'log' === action ){
 			args.ticket = ticket.id;
 			args.comment = ticket.comment;
 			args.activity = ticket.activity;
+			if ( ticket.project ) {
+				project = ticket.project;
+			}
 		} else {
-			console.log( 'Error: '.error + 'Unknown Ticket' )
+			console.log( 'Error: '.error + 'Unknown Ticket' );
 
 			horseman.close();
 			process.exit(1);
@@ -55,8 +60,11 @@ if ( 'log' === action ){
 	}
 
 	if ( ! _.isFinite( argv.activity ) ) {
-		if ( typeof config.activity[ argv.activity ] !== 'undefined' ) {
-			args.activity = config.activity[ argv.activity ];
+		if (
+			typeof config.activity[ project ] !== 'undefined'
+			&& typeof config.activity[ project ][ args.activity ] !== 'undefined'
+		) {
+			args.activity = config.activity[ project ][ args.activity ];
 		}
 	}
 
@@ -87,7 +95,7 @@ if ( 'log' === action ){
 var Horseman = require('node-horseman');
 var horseman = new Horseman();
 
-horseman.userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64; rv:27.0) Gecko/20100101 Firefox/27.0")
+horseman.userAgent( 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:27.0) Gecko/20100101 Firefox/27.0' )
 	.viewport( 1280, 1024 )
 	.cookies( {} );
 
@@ -108,7 +116,7 @@ central.login( horseman, config )
 			console.log( 'Success: '.success + 'Logged time' );
 			console.log( args );
 		} else {
-			console.log( 'Error: '.success + 'Cannot log this entry' )
+			console.log( 'Error: '.success + 'Cannot log this entry' );
 			console.log( args );
 
 			horseman.close();

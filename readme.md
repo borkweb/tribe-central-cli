@@ -22,11 +22,12 @@ This was done purely to make the process of logging what I've done easier, so fo
 * **--spent:** Expects a numeric value
 * **--comment:** Expects a String describing your activity
 * **--activity:** Expects a String with the type of activity or a numeric id
+* **--project:** Expects a String with the project name that correllates to an activity id collection in your config.json
 
 
 _Passing all arguments without names_
 ```
-central log 37317 20-11-2015 1 "My own Slack activity for today" 25
+central log 37317 20-11-2015 1 "My own Slack activity for today" 25 default
 ```
 
 _Shortcuted using `tickets` index from `config.json` and used 2 named arguments_
