@@ -15,7 +15,7 @@ colors.setTheme({
 // Get our configurations file
 var config = require( './config.json' );
 config.central = {
-	baseUrl: "https://central.tri.be",
+	baseUrl: 'https://central.tri.be',
 };
 
 // Configure central
@@ -23,9 +23,10 @@ var central = require( './inc' )( config );
 
 // Setup Arguments variables
 var action,
+	project,
 	args = {};
 
-argv._.forEach( function ( val, index, array ) {
+argv._.forEach( function ( val, index ) {
 	switch (index) {
 		case 0:
 			action = val;
@@ -39,6 +40,7 @@ if ( 'log' === action ){
 	args.spent = argv._[3];
 	args.comment = argv._[4];
 	args.activity = argv._[5];
+	project = argv._[6] ? argv._[6] : 'default';
 
 	if ( ! _.isFinite( args.ticket ) ) {
 		if ( typeof config.tickets[ args.ticket ] !== 'undefined' ) {
@@ -48,15 +50,21 @@ if ( 'log' === action ){
 			args.ticket = ticket.id;
 			args.comment = ticket.comment;
 			args.activity = ticket.activity;
+			if ( ticket.project ) {
+				project = ticket.project;
+			}
 		} else {
-			console.log( 'Error: '.error + 'Unknown Ticket' )
+			console.log( 'Error: '.error + 'Unknown Ticket' );
 			process.exit(1);
 		}
 	}
 
 	if ( ! _.isFinite( argv.activity ) ) {
-		if ( typeof config.activity[ argv.activity ] !== 'undefined' ) {
-			args.activity = config.activity[ argv.activity ];
+		if (
+			typeof config.activity[ project ] !== 'undefined'
+			&& typeof config.activity[ project ][ args.activity ] !== 'undefined'
+		) {
+			args.activity = config.activity[ project ][ args.activity ];
 		}
 	}
 
